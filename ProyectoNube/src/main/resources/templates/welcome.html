@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Página de Bienvenida</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+			min-height: 100vh;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			padding: 20px;
+		}
+
+		.container {
+			background: rgba(255, 255, 255, 0.95);
+			border-radius: 20px;
+			box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+			padding: 60px 50px;
+			max-width: 700px;
+			width: 100%;
+			text-align: center;
+			animation: fadeIn 0.8s ease-out;
+		}
+
+		@keyframes fadeIn {
+			from {
+				opacity: 0;
+				transform: translateY(-30px);
+			}
+
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		.logo {
+			width: 80px;
+			height: 80px;
+			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+			border-radius: 50%;
+			margin: 0 auto 30px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+		}
+
+		.logo svg {
+			width: 45px;
+			height: 45px;
+			fill: white;
+		}
+
+		.logo i {
+			font-size: 45px;
+			color: white;
+		}
+
+		h1 {
+			color: #2d3748;
+			font-size: 2.5em;
+			font-weight: 700;
+			margin-bottom: 20px;
+			line-height: 1.2;
+		}
+
+		.subtitle {
+			color: #4a5568;
+			font-size: 1.1em;
+			line-height: 1.8;
+			margin-bottom: 35px;
+		}
+
+		.app-name {
+			color: #667eea;
+			font-weight: 700;
+			font-size: 1.15em;
+		}
+
+		.tech-stack {
+			display: flex;
+			justify-content: center;
+			gap: 15px;
+			flex-wrap: wrap;
+			margin-top: 40px;
+		}
+
+		.tech-badge {
+			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+			color: white;
+			padding: 10px 20px;
+			border-radius: 25px;
+			font-size: 0.9em;
+			font-weight: 600;
+			box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
+		}
+
+		.tech-badge:hover {
+			transform: translateY(-3px);
+			box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+		}
+
+		.divider {
+			width: 60px;
+			height: 4px;
+			background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+			margin: 30px auto;
+			border-radius: 2px;
+		}
+
+		@media (max-width: 768px) {
+			.container {
+				padding: 40px 30px;
+			}
+
+			h1 {
+				font-size: 2em;
+			}
+
+			.subtitle {
+				font-size: 1em;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="logo">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+				<path d="M13 3L4 14h7v7l9-11h-7V3z" />
+			</svg>
+		</div>
+
+		<h1 th:text="${mensaje}">¡Bienvenido a ProyectoNube!</h1>
+
+		<div class="divider"></div>
+
+		<p class="subtitle">
+			Esta es la aplicación de ejemplo <span class="app-name">proyectonube</span>,
+			una solución moderna construida con tecnologías de vanguardia para la nube.
+		</p>
+
+		<div class="tech-stack">
+			<div class="tech-badge">Spring Boot</div>
+			<div class="tech-badge">Azure Cloud</div>
+			<div class="tech-badge">Thymeleaf</div>
+		</div>
+	</div>
+</body>
+
+</html>
