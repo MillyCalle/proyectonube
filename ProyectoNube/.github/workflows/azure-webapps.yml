@@ -3,37 +3,43 @@ name: Build and Deploy Java App to Azure
 on:
   push:
     branches:
-      - main
+      - main  # rama que activará el despliegue
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
+      # 1️⃣ Clonar el repositorio
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      # 2️⃣ Configurar Java 17
       - name: Set up Java
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
           java-version: '17'
 
+      # 3️⃣ Compilar con Maven en la carpeta correcta
       - name: Build with Maven
         run: mvn clean package
-        working-directory: ./proyectonube
+        working-directory: ./ProyectoNube  # <-- aquí está tu pom.xml
 
+      # 4️⃣ Renombrar WAR a ROOT.war para desplegar en la raíz
       - name: Rename WAR to ROOT.war
-        run: mv ./proyectonube/target/proyectonube-0.0.1-SNAPSHOT.war ./proyectonube/target/ROOT.war
+        run: mv ./ProyectoNube/target/proyectonube-0.0.1-SNAPSHOT.war ./ProyectoNube/target/ROOT.war
 
+      # 5️⃣ Login en Azure usando Service Principal
       - name: Login via Azure CLI
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+      # 6️⃣ Desplegar ROOT.war en Azure App Service
       - name: Deploy WAR to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'WEBClientes-App'
           slot-name: 'production'
-          package: '${{ github.workspace }}/proyectonube/target/ROOT.war'
+          package: '${{ github.workspace }}/ProyectoNube/target/ROOT.war'
